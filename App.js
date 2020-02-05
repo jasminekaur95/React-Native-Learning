@@ -1,19 +1,36 @@
-import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import React, { useState } from "react";
+import { StyleSheet, Text, View, Button } from "react-native";
 
 export default function App() {
+  const [name, setName] = useState("John");
+  const [age, setAge] = useState(20);
+  const [person, setPerson] = useState({
+    name: "Dave",
+    hobby: "playing guitar"
+  });
+
+  // const clickHandler = () => {
+  //   setName("Jen");
+  // };
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        <Text style={styles.boldText}>Hello World!</Text>
-      </View>
-      <View style={styles.body}>
-        <Text style={styles.text}>
-          Welcome to my project!<Text> This is the beginning.</Text>
+        <Text style={styles.boldText}>
+          My name is {name}. My age is {age}
         </Text>
-        <Text>Welcome to my project!</Text>
-        <Text>Welcome to my project!</Text>
-        <Text>Welcome to my project!</Text>
+        <Text>
+          My friend's name is {person.name}. he loves {person.hobby}
+        </Text>
+      </View>
+      <View style={styles.buttonContainer}>
+        <Button
+          title="Update User"
+          onPress={() => {
+            setName("James"),
+              setAge(25),
+              setPerson({ name: "Den", hobby: "listening music" });
+          }}
+        />
       </View>
     </View>
   );
@@ -39,5 +56,10 @@ const styles = StyleSheet.create({
   },
   text: {
     color: "green"
+  },
+  buttonContainer: {
+    color: "green",
+    marginTop: 70,
+    backgroundColor: "pink"
   }
 });
