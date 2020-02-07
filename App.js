@@ -1,13 +1,9 @@
 import React, { useState } from "react";
-import { StyleSheet, Text, View, Button } from "react-native";
+import { StyleSheet, Text, View, TextInput } from "react-native";
 
 export default function App() {
   const [name, setName] = useState("John");
   const [age, setAge] = useState(20);
-  const [person, setPerson] = useState({
-    name: "Dave",
-    hobby: "playing guitar"
-  });
 
   // const clickHandler = () => {
   //   setName("Jen");
@@ -15,23 +11,31 @@ export default function App() {
   return (
     <View style={styles.container}>
       <View style={styles.header}>
+        <Text>Enter name:</Text>
+        <TextInput
+          onChangeText={val => {
+            setName(val);
+          }}
+          style={styles.input}
+          placeholder="e.g. Paul Watson"
+          multiline
+        />
+
+        <Text>Enter age:</Text>
+        <TextInput
+          onChangeText={val => {
+            setAge(val);
+          }}
+          style={styles.input}
+          placeholder="e.g. 24"
+          multiline
+          keyboardType="numeric"
+        />
         <Text style={styles.boldText}>
           My name is {name}. My age is {age}
         </Text>
-        <Text>
-          My friend's name is {person.name}. he loves {person.hobby}
-        </Text>
       </View>
-      <View style={styles.buttonContainer}>
-        <Button
-          title="Update User"
-          onPress={() => {
-            setName("James"),
-              setAge(25),
-              setPerson({ name: "Den", hobby: "listening music" });
-          }}
-        />
-      </View>
+      <View style={styles.buttonContainer}></View>
     </View>
   );
 }
@@ -44,11 +48,12 @@ const styles = StyleSheet.create({
     justifyContent: "center"
   },
   header: {
-    backgroundColor: "pink",
+    // backgroundColor: "pink",
     padding: 20
   },
   boldText: {
-    fontWeight: "bold"
+    fontWeight: "bold",
+    color: "blue"
   },
   body: {
     backgroundColor: "yellow",
@@ -59,7 +64,13 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     color: "green",
-    marginTop: 70,
-    backgroundColor: "pink"
+    marginTop: 70
+  },
+  input: {
+    borderWidth: 1,
+    padding: 10,
+    width: 300,
+    marginTop: 10,
+    marginBottom: 20
   }
 });
