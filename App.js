@@ -1,76 +1,42 @@
 import React, { useState } from "react";
-import { StyleSheet, Text, View, TextInput } from "react-native";
+import { StyleSheet, Text, View, ScrollView } from "react-native";
 
 export default function App() {
-  const [name, setName] = useState("John");
-  const [age, setAge] = useState(20);
+  const [people, setPeople] = useState([
+    { name: "Jen", key: "1" },
+    { name: "James", key: "2" },
+    { name: "John", key: "3" },
+    { name: "Jennie", key: "4" },
+    { name: "James", key: "5" },
+    { name: "John", key: "6" },
+    { name: "Jennie", key: "7" },
+    { name: "James", key: "8" },
+    { name: "John", key: "9" },
+    { name: "Jennie", key: "10" }
+  ]);
 
-  // const clickHandler = () => {
-  //   setName("Jen");
-  // };
   return (
     <View style={styles.container}>
-      <View style={styles.header}>
-        <Text>Enter name:</Text>
-        <TextInput
-          onChangeText={val => {
-            setName(val);
-          }}
-          style={styles.input}
-          placeholder="e.g. Paul Watson"
-          multiline
-        />
-
-        <Text>Enter age:</Text>
-        <TextInput
-          onChangeText={val => {
-            setAge(val);
-          }}
-          style={styles.input}
-          placeholder="e.g. 24"
-          multiline
-          keyboardType="numeric"
-        />
-        <Text style={styles.boldText}>
-          My name is {name}. My age is {age}
-        </Text>
-      </View>
-      <View style={styles.buttonContainer}></View>
+      <ScrollView>
+        {people.map(item => (
+          <View key={item.key}>
+            <Text style={styles.item}>{item.name}</Text>
+          </View>
+        ))}
+      </ScrollView>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center"
-  },
-  header: {
-    // backgroundColor: "pink",
+    marginTop: 50,
     padding: 20
   },
-  boldText: {
-    fontWeight: "bold",
-    color: "blue"
-  },
-  body: {
-    backgroundColor: "yellow",
-    padding: 20
-  },
-  text: {
-    color: "green"
-  },
-  buttonContainer: {
-    color: "green",
-    marginTop: 70
-  },
-  input: {
-    borderWidth: 1,
-    padding: 10,
-    width: 300,
-    marginTop: 10,
-    marginBottom: 20
+  item: {
+    marginTop: 24,
+    padding: 30,
+    backgroundColor: "pink"
   }
 });
