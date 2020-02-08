@@ -1,57 +1,28 @@
 import React, { useState } from "react";
-import {
-  StyleSheet,
-  Text,
-  View,
-  FlatList,
-  TouchableOpacity
-} from "react-native";
+import { StyleSheet, Text, View, FlatList } from "react-native";
+import Header from "./components/header";
 
 export default function App() {
-  const [people, setPeople] = useState([
-    { name: "Jen", id: "1" },
-    { name: "James", id: "2" },
-    { name: "John", id: "3" },
-    { name: "Jennie", id: "4" },
-    { name: "James", id: "5" },
-    { name: "John", id: "6" },
-    { name: "Jennie", id: "7" },
-    { name: "James", id: "8" },
-    { name: "John", id: "9" },
-    { name: "Jennie", id: "10" }
+  const [todos, settodos] = useState([
+    { text: "Work on Resume", key: "1" },
+    { text: "Do grocery shopping", key: "2" },
+    { text: "Cook breakfast", key: "3" }
   ]);
-
-  const pressHandler = id => {
-    console.log(id);
-    setPeople(prevPeople => {
-      return prevPeople.filter(person => person.id != id);
-    });
-  };
-
   return (
     <View style={styles.container}>
-      <FlatList
-        numColumns={2}
-        keyExtractor={item => item.id}
-        data={people}
-        renderItem={({ item }) => (
-          <TouchableOpacity
-            onPress={() => {
-              pressHandler(item.id);
-            }}
-          >
-            <Text style={styles.item}>{item.name}</Text>
-          </TouchableOpacity>
-        )}
-      />
-
-      {/* <ScrollView>
-        {people.map(item => (
-          <View key={item.key}>
-            <Text style={styles.item}>{item.name}</Text>
-          </View>
-        ))}
-      </ScrollView> */}
+      {/* header */}
+      <Header />
+      <View style={styles.content}>
+        {/* to do form */}
+        <View style={styles.list}>
+          <FlatList
+            data={todos}
+            renderItem={({ item }) => (
+              <Text style={styles.item}>{item.text}</Text>
+            )}
+          />
+        </View>
+      </View>
     </View>
   );
 }
@@ -59,14 +30,12 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     backgroundColor: "#fff",
-    marginTop: 50,
-    padding: 20
+    flex: 1,
+    marginTop: 60
   },
   item: {
-    marginTop: 24,
+    marginTop: 20,
     padding: 10,
-    marginHorizontal: 10,
-    borderWidth: 1,
-    width: 150
+    backgroundColor: "orange"
   }
 });
